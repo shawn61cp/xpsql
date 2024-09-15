@@ -1,0 +1,110 @@
+#!/bin/bash
+
+# Script to automate running PSQL with 
+# PSPG pager connected by a pipe,
+# and creating/destroying TMUX panes
+# for both.
+
+# Usage:
+# xpsqlv or xpsqlh  followed by arguments as for PSQL.
+# xpsqlv creates panes stacked vertically.
+# xpsqlh creates panes placed horizontally side by side.
+# xpsql by itself defaults to vertical stacking.
+
+# xpsqlv and xpsqlh should be created as links to xpsql.
+
+# Requires
+# A named pipe (mkfifo) created  and located as set in $pipe below.
+
+######################################
+# Setup Variables
+######################################
+pipe="$HOME/psql1"
+hadj="40%"
+vadj="60%"
+
+######################################
+# Functions
+######################################
+
+# sanity checks / usage
+sanity_checks() {
+	if [[ $# -eq 0 || ( $# -eq 1 && "$1" == "-h" )  ]]; then
+		echo -e "Usage:\n"
+		echo -e "xpsqlh PSQLARG [ PSQLARG ...] Panes placed horizontally side-by-side"
+		echo -e "xpsqlv PSQLARG [ PSQLARG ...] Panes stacked vertically"
+		echo -e "xpsql  PSQLARG [ PSQLARG ...] Panes stacked vertically"
+		echo -e "\nStart PSPG in a new TMUX pane, start PSQL in the current pane, connecting the query output to PSPG via a pipe."
+		echo -e "\nPSQLARG		Argument to PSQL"
+		echo -e "\nNOTE: PSPG will appear to be unresponsive until the first time some output is sent from PSQL."
+		exit 1
+	fi
+
+	if [[ ! -p "$pipe" ]]; then
+		echo "$0: Named pipe \"$pipe\" not found. (Use mkfifo to create it.)"
+		exit 1
+	fi
+
+	if [[ -z "$TMUX" ]]; then
+		echo "$0: This does not seem to be a TMUX session."
+		exit 1
+	fi
+}
+
+# Parse active pane from TMUX
+tmux_active_pane() {
+
+	if [[ -n "$TMUX" ]]; then
+		panes=$(tmux list-panes)
+		oldifs=$IFS
+		IFS=$'\n'
+		for pane in $panes; do
+			if [[ "$pane" == *"(active)"* ]]; then
+				echo "${pane%%:*}"
+				IFS=$oldifs
+				return
+			fi
+		done
+		IFS=$oldifs
+	fi
+
+}
+
+######################################
+# Main
+######################################
+
+sanity_checks $@ >&2
+
+# Determine pane stacking mode from called name.
+case ${0##*/} in
+	xpsqlh) splitmode="-h";;
+	xpsqlv) splitmode="-v";;
+	*) splitmode="-v";;
+esac
+
+# Save original pane, abort if none (TMUX not running)
+paneA="$(tmux_active_pane)"
+if [[ -z "$paneA" ]]; then echo "$0: Could not get active TMUX pane" >&2; exit 1; fi
+
+# Create new pane arranged as requested
+tmux split-window $splitmode
+paneB="$(tmux_active_pane)"
+if [[ -z "$paneB" ]]; then echo "$0: Could not get secondary TMUX pane" >&2; exit 1; fi
+
+# Return to original pane and resize
+tmux last-pane
+case $splitmode in
+	-h) tmux resize-pane -x $hadj;;
+	-v) tmux resize-pane -y $vadj;;
+esac
+
+# Start PSPG in secondary pane, opened on the fifo
+tmux send-keys -t $paneB "pspg --stream -f \"$pipe\"" enter
+
+# Start PSQL in the original pane, query output goes to the fifo
+psql -o "$pipe" $@
+
+# PSQL having exited, kill the secondary pane along with PSPG
+tmux kill-pane -t $paneB
+
