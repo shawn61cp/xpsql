@@ -8,6 +8,8 @@ One of its fantastic features is the ability to continuously read input from a n
 
 I like TMUX for text windowing and so I wrote this script to automate the creation of a pane for data display, starting PSPG in this pane, starting PSQL in the original pane, and setting both up for communication via a named pipe.
 
+![Screenshot](https://github.com/shawn61cp/xpsql/blob/main/screenshot.jpg)
+
 ## Prerequisites
 * Packages needed
   * postgresql-client
@@ -33,4 +35,3 @@ In both cases follow the command with arguments just as you would for PSQL.  Whe
 
 NOTE: PSPG will appear unresposive until the first time some output is sent from PSQL.
 
-![Screenshot](https://github.com/shawn61cp/xpsql/blob/main/screenshot.jpg)
