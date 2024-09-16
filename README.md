@@ -9,7 +9,7 @@ One of its fantastic features is the ability to continuously read input from a n
 I like TMUX for text windowing and so I wrote this script to automate the creation of a pane for data display, starting PSPG in this pane, starting PSQL in the original pane, and setting both up for communication via a named pipe.
 
 ## Prerequisites
-* Packages needed for your distribution
+* Packages needed
   * postgresql-client
   * pspg
   * tmux
