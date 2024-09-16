@@ -20,7 +20,7 @@ I like TMUX for text windowing and so I wrote this script to automate the creati
   - <code>cd $HOME/.local/bin</code>
   - <code>ln -s xpsql xpsqlv</code>
   - <code>ln -s xpsql xpsqlh</code>
-- In your home directory create the named pipe.
+- In your home directory create the named pipe.  If you have installed this system-wide, any user who uses the script will need to do this step (only once).
   - <code>cd $HOME</code>
   - <code>mkfifo psql1</code>
 
