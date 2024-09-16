@@ -27,6 +27,6 @@ I like TMUX for text windowing and so I wrote this script to automate the creati
 ## Usage
 Enter <code>xpsql -h</code> for usage/help.
 
-Run <code>xpsqlv</code> to produce panes that are vertically stacked. Run <code>xpsqlh</code> to produce panes that are placed horizontally side-by-side.  <code>xpsql</code> by itself defaults to vertial stacking.
+Run <code>xpsqlv</code> to produce panes that are vertically stacked. Run <code>xpsqlh</code> to produce panes that are placed horizontally side-by-side.  <code>xpsql</code> by itself defaults to vertical stacking.
 
 In both cases follow the command with arguments just as you would for PSQL.  When you exit PSQL, the created pane along with PSPG will be destroyed.
