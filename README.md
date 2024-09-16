@@ -32,3 +32,5 @@ Run <code>xpsqlv</code> (in a TMUX window) to produce panes that are vertically 
 In both cases follow the command with arguments just as you would for PSQL.  When you exit PSQL, the created pane along with the PSPG instance will be destroyed.
 
 NOTE: PSPG will appear unresposive until the first time some output is sent from PSQL.
+
+![Screenshot](https://github.com/shawn61cp/xpsql/blob/main/screenshot.jpg)
