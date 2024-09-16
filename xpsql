@@ -29,7 +29,7 @@ vadj="60%"
 
 # sanity checks / usage
 sanity_checks() {
-	if [[ $# -eq 0 || ( $# -eq 1 && "$1" == "-h" )  ]]; then
+	if [[ $# -eq 1 && "$1" == "-h"  ]]; then
 		echo -e "Usage:\n"
 		echo -e "xpsqlh PSQLARG [ PSQLARG ...] Panes placed horizontally side-by-side"
 		echo -e "xpsqlv PSQLARG [ PSQLARG ...] Panes stacked vertically"
