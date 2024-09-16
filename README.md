@@ -1,5 +1,5 @@
 # xpsql
-Bash script to automate startup of PSQL and PSPG under TMUX
+Bash script to automate startup of PSQL and PSPG connected via a named pipe under TMUX
 
 ## Introduction
 There exists a wonderful pager [PSPG](https://github.com/okbob/pspg) developed for PostgreSQL.  It is useful for other things as well.
