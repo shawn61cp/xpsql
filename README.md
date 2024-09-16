@@ -15,7 +15,7 @@ I like TMUX for text windowing and so I wrote this script to automate the creati
   * tmux
  
 ## Installation
-- Download the <code>xpsql</code> script from this repository to a location of your choice, preferably somewhere along your <code>PATH<code>.  This example will use <code>/$HOME/.local/bin</code> but you could install it system-wide by placing it for instance in <code>/usr/local/bin</code>.
+- Download the <code>xpsql</code> script from this repository to a location of your choice, preferably somewhere along your <code>PATH</code>.  This example will use <code>/$HOME/.local/bin</code> but you could install it system-wide by placing it for instance in <code>/usr/local/bin</code>.
 - Create two symlinks to the script in the same location.
   - <code>cd $HOME/.local/bin
   - <code>ln -s xpsql xpsqlv</code>
@@ -27,6 +27,6 @@ I like TMUX for text windowing and so I wrote this script to automate the creati
 ## Usage
 Enter <code>xpsql -h</code> for usage/help.
 
-<code>xpsqlv</code> produces panes that are vertically stacked. <code>xpsqlh</code> produces panes placed horizontally side-by-side.  <code>xpsql</code> by itself defaults to vertial stacking.
+Run <code>xpsqlv</code> to produce panes that are vertically stacked. Run <code>xpsqlh</code> to produce panes that are placed horizontally side-by-side.  <code>xpsql</code> by itself defaults to vertial stacking.
 
 In both cases follow the command with arguments just as you would for PSQL.  When you exit PSQL, the created pane along with PSPG will be destroyed.
