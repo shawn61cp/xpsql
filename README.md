@@ -18,7 +18,7 @@ I like TMUX for text windowing and so I wrote this script to automate the creati
  
 ## Installation
 - Download the <code>xpsql</code> script from this repository to a location of your choice, preferably somewhere along your <code>PATH</code>.  This example will use <code>/$HOME/.local/bin</code> but you could install it system-wide by placing it for instance in <code>/usr/local/bin</code>.
-- Makee the script executable  and create two symlinks to the script in the same location.
+- Make the script executable  and create two symlinks to the script in the same location.
   - <code>cd $HOME/.local/bin</code>
   - <code>chmod 755 xpsql</code>
   - <code>ln -s xpsql xpsqlv</code>
