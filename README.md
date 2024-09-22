@@ -8,6 +8,7 @@ One of its fantastic features is the ability to continuously read input from a n
 
 I like TMUX for text windowing and so I wrote this script to automate the creation of a pane for data display, starting PSPG in this pane, starting PSQL in the original pane, and setting both up for communication via a named pipe.
 
+_Screenshot.  Custom colored prompts are not provided by this script._
 ![Screenshot](https://github.com/shawn61cp/xpsql/blob/main/screenshot1.jpg)
 
 ## Prerequisites
